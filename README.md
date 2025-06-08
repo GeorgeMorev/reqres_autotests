@@ -1,4 +1,4 @@
-# Reqres Autotests
+# Reqres Autotests (https://reqres.in/)
 
 Pet-проект по автоматизации API-тестирования с использованием [https://reqres.in](https://reqres.in).
 
