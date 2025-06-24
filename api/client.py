@@ -1,9 +1,10 @@
 import requests
+from endpoints import BASE_URL
 
 
 class ReqresClient:
-    def __init__(self, base_url):
-        self.base_url = base_url
+    def __init__(self):
+        self.base_url = BASE_URL
         self.session = requests.Session()
 
     def post(self, endpoint, data=None, json=None, **kwargs):
