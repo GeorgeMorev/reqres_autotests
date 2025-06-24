@@ -1,11 +1,14 @@
 import requests
-from endpoints import BASE_URL
+from api.endpoints import BASE_URL
 
 
 class ReqresClient:
     def __init__(self):
         self.base_url = BASE_URL
         self.session = requests.Session()
+        self.session.headers.update({
+            "x-api-key": "reqres-free-v1"
+        })
 
     def post(self, endpoint, data=None, json=None, **kwargs):
         url = self.base_url + endpoint
