@@ -1,5 +1,6 @@
 import allure
-from api.client import ReqresClient
+from utils.validators import validate_with_pydantic
+from api.models.users import ListUsersResponse
 
 
 @allure.epic("Users API")
@@ -12,6 +13,5 @@ def test_get_list_users(client):
     with allure.step("Проверяем статус-код ответа"):
         assert response.status_code == 200
 
-    with allure.step("Проверяем, что в теле ответа есть поле 'data'"):
-        data = response.json()
-        assert "data" in data
+    with allure.step("Валидация ответа с помощью Pydantic модели"):
+        validate_with_pydantic(response, ListUsersResponse)
