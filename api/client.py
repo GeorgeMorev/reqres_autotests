@@ -1,5 +1,6 @@
 import requests
 from api.endpoints import BASE_URL
+from api.endpoints import ENDPOINTS_DICTIONARY
 
 
 class ReqresClient:
@@ -29,3 +30,6 @@ class ReqresClient:
     def delete(self, endpoint, **kwargs):
         url = self.base_url + endpoint
         return self.session.delete(url, **kwargs)
+
+    def get_users_list(self):
+        return self.get(ENDPOINTS_DICTIONARY["list_users"])
