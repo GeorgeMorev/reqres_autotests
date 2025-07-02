@@ -26,7 +26,7 @@ jobs:
           pip install allure-pytest
 
       - name: Install Allure Commandline
-        uses: allure-framework/allure-action@v2.0.0
+        uses: allure-framework/allure-action@v2
 
       - name: Run tests with Allure results
         run: |
