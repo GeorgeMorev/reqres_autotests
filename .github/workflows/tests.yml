@@ -25,6 +25,9 @@ jobs:
           pip install -r requirements.txt
           pip install allure-pytest
 
+      - name: Install Allure Commandline
+        uses: allure-framework/allure-action@v2.0.0
+
       - name: Run tests with Allure results
         run: |
           pytest --alluredir=reports/allure-results
