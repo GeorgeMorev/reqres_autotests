@@ -62,13 +62,13 @@ jobs:
           REPORT_URL="https://georgemorev.github.io/reqres_autotests/"
 
           ESCAPE() {
-            echo "$1" | sed -E 's/([](){}#+\-_.*!`>~|\\$begin:math:display$$end:math:display$\.)/\\\1/g'
+            echo "$1" | sed -E 's/([_*\[\]()~`>#+=|{}.!\\])/\\\1/g'
           }
 
           ESCAPED_REPO=$(ESCAPE "$REPO")
           ESCAPED_BRANCH=$(ESCAPE "$BRANCH")
           ESCAPED_AUTHOR=$(ESCAPE "$COMMIT_AUTHOR")
-          ESCAPED_MESSAGE=$(ESCAPE "$COMMIT_MESSAGE")
+          ESCAPED_MESSAGE=$(printf "%s" "$COMMIT_MESSAGE" | ESCAPE)
           ESCAPED_URL=$(ESCAPE "$REPORT_URL")
 
           TEXT="✅ *Тесты завершены*\n\n📦 *Репозиторий:* ${ESCAPED_REPO}\n🌿 *Ветка:* ${ESCAPED_BRANCH}\n👤 *Автор:* ${ESCAPED_AUTHOR}\n💬 *Коммит:* ${ESCAPED_MESSAGE}\n📊 *Статус:* ${STATUS}"
