@@ -1,4 +1,3 @@
-<<<<<<< develop
 # Reqres Autotests (https://reqres.in/)
 
 Pet-проект по автоматизации API-тестирования с использованием [https://reqres.in](https://reqres.in).
@@ -35,4 +34,3 @@ pip install -r requirements.txt
 - [ ] Настроить отчётность через Allure
 =======
 # reqres_autotests
->>>>>>> main
