@@ -61,17 +61,15 @@ jobs:
           COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
           REPORT_URL="https://georgemorev.github.io/reqres_autotests/"
 
-          MESSAGE="✅ Тесты завершены\n\n📦 Репозиторий: $REPO\n🌿 Ветка: $BRANCH\n👤 Автор: $COMMIT_AUTHOR\n💬 Коммит: $COMMIT_MESSAGE\n📊 Статус: $STATUS"
+          TEXT="✅ *Тесты завершены*\n\n📦 *Репозиторий:* $REPO\n🌿 *Ветка:* $BRANCH\n👤 *Автор:* $COMMIT_AUTHOR\n💬 *Коммит:* $COMMIT_MESSAGE\n📊 *Статус:* $STATUS"
 
-          # Добавим ссылку на отчет, если ветка подходящая
           if [[ "$BRANCH" == "main" || "$BRANCH" == "develop" ]]; then
-            MESSAGE="$MESSAGE\n\n📎 Allure-отчет: $REPORT_URL"
+            TEXT="$TEXT\n\n📎 [Открыть Allure-отчёт]($REPORT_URL)"
           fi
 
           curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
-            -d chat_id=${TELEGRAM_CHAT_ID} \
-            -d text="$MESSAGE" \
-            -d parse_mode=Markdown
+            -H "Content-Type: application/json" \
+            -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"${TEXT}\", \"parse_mode\": \"Markdown\"}"
 
   deploy-report:
     needs: test
