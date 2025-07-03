@@ -66,8 +66,8 @@ jobs:
           ESCAPED_BRANCH=$(echo "$BRANCH" | sed -E 's/[_\-\.]/\\&/g')
           ESCAPED_AUTHOR=$(echo "$COMMIT_AUTHOR" | sed -E 's/[_\-\.]/\\&/g')
           ESCAPED_MESSAGE=$(echo "$COMMIT_MESSAGE" | sed -E 's/([_*\[\]()~`>#+\-=|{}.!])/\\\1/g')
-          ESCAPED_URL=$(echo "$REPORT_URL" | sed -E 's/([_*$begin:math:display$$end:math:display$()~`>#+\-=|{}.!])/\\\1/g')
-
+          ESCAPED_URL=$(echo "$REPORT_URL" | sed -E 's/([_*\[\]()~`>#+\-=|{}.!])/\\\1/g')
+          
           TEXT="✅ *Тесты завершены*\n\n📦 *Репозиторий:* ${ESCAPED_REPO}\n🌿 *Ветка:* ${ESCAPED_BRANCH}\n👤 *Автор:* ${ESCAPED_AUTHOR}\n💬 *Коммит:* ${ESCAPED_MESSAGE}\n📊 *Статус:* ${STATUS}"
 
           if [[ "$BRANCH" == "main" || "$BRANCH" == "develop" ]]; then
