@@ -69,7 +69,9 @@ jobs:
           ESCAPED_BRANCH=$(printf "%s" "$BRANCH" | ESCAPE)
           ESCAPED_AUTHOR=$(printf "%s" "$COMMIT_AUTHOR" | ESCAPE)
           ESCAPED_MESSAGE=$(printf "%s" "$COMMIT_MESSAGE" | ESCAPE)
-          ESCAPED_URL=$(printf "%s" "$REPORT_URL" | ESCAPE)
+          ESCAPED_URL_LINK=$(printf "%s" "$REPORT_URL" \
+            | perl -pe 's/([_\*\[\]\(\)\~\`\>\#\+\=\|\{\}\.\!\-])/\\$1/g' \
+            | sed -E 's/\\$begin:math:text$/\\\\\\\\(/g; s/\\\\$end:math:text$/\\\\)/g')
 
           TEXT="✅ *Тесты завершены*\n\n📦 *Репозиторий:* ${ESCAPED_REPO}\n🌿 *Ветка:* ${ESCAPED_BRANCH}\n👤 *Автор:* ${ESCAPED_AUTHOR}\n💬 *Коммит:* ${ESCAPED_MESSAGE}\n📊 *Статус:* ${STATUS}"
 
