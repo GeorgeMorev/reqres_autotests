@@ -59,12 +59,15 @@ jobs:
           BRANCH="${{ github.ref_name }}"
           COMMIT_AUTHOR="${{ github.actor }}"
           COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
-          REPORT_URL="https://georgemorev.github.io/reqres\\_autotests/"
+          REPORT_URL="https://georgemorev.github.io/reqres_autotests/"
+
+          # Экранируем подчёркивания в ссылке
+          SAFE_URL=${REPORT_URL//_/"\\_"}
 
           TEXT="✅ *Тесты завершены*\n\n📦 *Репозиторий:* $REPO\n🌿 *Ветка:* $BRANCH\n👤 *Автор:* $COMMIT_AUTHOR\n💬 *Коммит:* $COMMIT_MESSAGE\n📊 *Статус:* $STATUS"
 
           if [[ "$BRANCH" == "main" || "$BRANCH" == "develop" ]]; then
-            TEXT="$TEXT\n\n📎 [Открыть Allure-отчёт]($REPORT_URL)"
+            TEXT="$TEXT\n\n📎 [Открыть Allure-отчёт]($SAFE_URL)"
           fi
 
           curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
