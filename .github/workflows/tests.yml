@@ -62,7 +62,7 @@ jobs:
           REPORT_URL="https://georgemorev.github.io/reqres_autotests/"
 
           ESCAPE() {
-            echo "$1" | sed -E 's/([][(){}#+\-_.*!`>~|\\])/\\\1/g'
+            echo "$1" | sed -E 's/([][(){}#+\-_.*!`>~|\\])/\\\1/g; s/\./\\./g'
           }
 
           ESCAPED_REPO=$(ESCAPE "$REPO")
