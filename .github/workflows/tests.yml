@@ -78,9 +78,7 @@ jobs:
           TEXT="✅ *Тесты завершены*\n\n📦 *Репозиторий:* ${ESCAPED_REPO}\n🌿 *Ветка:* ${ESCAPED_BRANCH}\n👤 *Автор:* ${ESCAPED_AUTHOR}\n💬 *Коммит:* ${ESCAPED_MESSAGE}\n📊 *Статус:* ${STATUS}"
 
           if [[ "$BRANCH" == "main" || "$BRANCH" == "develop" ]]; then
-          ESCAPED_LINK_TEXT=$(printf "%s" "Открыть Allure-отчёт" | ESCAPE)
-          ESCAPED_URL_LINK=$(printf "%s" "$REPORT_URL" | ESCAPE)
-          TEXT="$TEXT\n\n📎 \[${ESCAPED_LINK_TEXT}\]\(${ESCAPED_URL_LINK}\)"
+            TEXT="$TEXT\n\n📎 \[${ESCAPED_LINK_TEXT}\]\(${ESCAPED_URL_LINK}\)"
           fi
 
           curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
