@@ -59,7 +59,7 @@ jobs:
           BRANCH="${{ github.ref_name }}"
           COMMIT_AUTHOR="${{ github.actor }}"
           COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
-          REPORT_URL="https://georgemorev.github.io/reqres_autotests/"
+          REPORT_URL="https://georgemorev.github.io/reqres\\_autotests/"
 
           TEXT="✅ *Тесты завершены*\n\n📦 *Репозиторий:* $REPO\n🌿 *Ветка:* $BRANCH\n👤 *Автор:* $COMMIT_AUTHOR\n💬 *Коммит:* $COMMIT_MESSAGE\n📊 *Статус:* $STATUS"
 
