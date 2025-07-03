@@ -61,18 +61,22 @@ jobs:
           COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
           REPORT_URL="https://georgemorev.github.io/reqres_autotests/"
 
-          # Экранируем подчёркивания в ссылке
-          SAFE_URL=${REPORT_URL//_/"\\_"}
+          # Экранируем спецсимволы для MarkdownV2
+          ESCAPED_REPO=$(echo "$REPO" | sed -E 's/[_\-\.]/\\&/g')
+          ESCAPED_BRANCH=$(echo "$BRANCH" | sed -E 's/[_\-\.]/\\&/g')
+          ESCAPED_AUTHOR=$(echo "$COMMIT_AUTHOR" | sed -E 's/[_\-\.]/\\&/g')
+          ESCAPED_MESSAGE=$(echo "$COMMIT_MESSAGE" | sed -E 's/([_*\[\]()~`>#+\-=|{}.!])/\\\1/g')
+          ESCAPED_URL=$(echo "$REPORT_URL" | sed -E 's/([_*$begin:math:display$$end:math:display$()~`>#+\-=|{}.!])/\\\1/g')
 
-          TEXT="✅ *Тесты завершены*\n\n📦 *Репозиторий:* $REPO\n🌿 *Ветка:* $BRANCH\n👤 *Автор:* $COMMIT_AUTHOR\n💬 *Коммит:* $COMMIT_MESSAGE\n📊 *Статус:* $STATUS"
+          TEXT="✅ *Тесты завершены*\n\n📦 *Репозиторий:* ${ESCAPED_REPO}\n🌿 *Ветка:* ${ESCAPED_BRANCH}\n👤 *Автор:* ${ESCAPED_AUTHOR}\n💬 *Коммит:* ${ESCAPED_MESSAGE}\n📊 *Статус:* ${STATUS}"
 
           if [[ "$BRANCH" == "main" || "$BRANCH" == "develop" ]]; then
-            TEXT="$TEXT\n\n📎 [Открыть Allure-отчёт]($SAFE_URL)"
+            TEXT="$TEXT\n\n📎 \[Открыть Allure\-отчёт\]\(${ESCAPED_URL}\)"
           fi
 
           curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
             -H "Content-Type: application/json" \
-            -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"${TEXT}\", \"parse_mode\": \"Markdown\"}"
+            -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"${TEXT}\", \"parse_mode\": \"MarkdownV2\"}"
 
   deploy-report:
     needs: test
