@@ -1,0 +1,5 @@
+User-Agent: python-requests/2.32.4
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+x-api-key: reqres-free-v1
