@@ -62,13 +62,15 @@ jobs:
           REPORT_URL="https://georgemorev.github.io/reqres_autotests/"
 
           ESCAPE() {
-            perl -pe 's/([_\*\[\]\(\)\~\`\>\#\+\=\|\{\}\.\!\-])/\\$1/g'
+            perl -pe 's/([_\*$begin:math:display$$end:math:display$$begin:math:text$$end:math:text$\~\`\>\#\+\=\|\{\}\.\!\-])/\\$1/g'
           }
-
+          
           ESCAPED_REPO=$(printf "%s" "$REPO" | ESCAPE)
           ESCAPED_BRANCH=$(printf "%s" "$BRANCH" | ESCAPE)
           ESCAPED_AUTHOR=$(printf "%s" "$COMMIT_AUTHOR" | ESCAPE)
           ESCAPED_MESSAGE=$(printf "%s" "$COMMIT_MESSAGE" | ESCAPE)
+          ESCAPED_LINK_TEXT=$(printf "%s" "Открыть Allure-отчёт" | ESCAPE)
+          
           ESCAPED_URL_LINK=$(printf "%s" "$REPORT_URL" \
             | perl -pe 's/([_\*\[\]\(\)\~\`\>\#\+\=\|\{\}\.\!\-])/\\$1/g' \
             | sed -E 's/\\$begin:math:text$/\\\\\\\\(/g; s/\\\\$end:math:text$/\\\\)/g')
