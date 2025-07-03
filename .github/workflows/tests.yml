@@ -64,7 +64,7 @@ jobs:
           name: allure-report
           path: report-to-publish
 
-      - name: Setup Git
+      - name: Setup Git user for deployment
         run: |
             git config --global user.name "github-actions[bot]"
             git config --global user.email "github-actions[bot]@users.noreply.github.com"
