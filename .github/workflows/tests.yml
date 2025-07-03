@@ -65,11 +65,11 @@ jobs:
             perl -pe 's/([_\*\[\]\(\)\~\`\>\#\+\=\|\{\}\.\!\-])/\\$1/g'
           }
 
-          ESCAPED_REPO=$(ESCAPE "$REPO")
-          ESCAPED_BRANCH=$(ESCAPE "$BRANCH")
-          ESCAPED_AUTHOR=$(ESCAPE "$COMMIT_AUTHOR")
+          ESCAPED_REPO=$(printf "%s" "$REPO" | ESCAPE)
+          ESCAPED_BRANCH=$(printf "%s" "$BRANCH" | ESCAPE)
+          ESCAPED_AUTHOR=$(printf "%s" "$COMMIT_AUTHOR" | ESCAPE)
           ESCAPED_MESSAGE=$(printf "%s" "$COMMIT_MESSAGE" | ESCAPE)
-          ESCAPED_URL=$(ESCAPE "$REPORT_URL")
+          ESCAPED_URL=$(printf "%s" "$REPORT_URL" | ESCAPE)
 
           TEXT="✅ *Тесты завершены*\n\n📦 *Репозиторий:* ${ESCAPED_REPO}\n🌿 *Ветка:* ${ESCAPED_BRANCH}\n👤 *Автор:* ${ESCAPED_AUTHOR}\n💬 *Коммит:* ${ESCAPED_MESSAGE}\n📊 *Статус:* ${STATUS}"
 
