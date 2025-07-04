@@ -4,7 +4,7 @@
 
 ## 🧪 Стек технологий
 
-- Python 3.11  
+- Python 3.12  
 - Pytest  
 - Requests  
 - Allure (отчетность)  
@@ -12,18 +12,6 @@
 - Telegram Bot API (уведомления)  
 - Pydantic (валидация ответов API)  
 
-## 📁 Структура проекта
-reqres_autotests/
-├── tests/                # Тесты
-│   ├── users/            # Группы тестов по сущности "Users"
-│   └── ...
-├── data/                 # Тестовые данные
-├── models/               # Pydantic-модели для валидации
-├── utils/                # Утилиты, shared-логика
-│   └── api_client.py     # Базовый API-клиент
-├── conftest.py           # Общие фикстуры
-├── pytest.ini
-└── requirements.txt
 
 ## 🚀 Запуск тестов
 
@@ -41,7 +29,7 @@ allure serve allure-results
 	•	Генерируется Allure-отчет
 	•	При успехе отправляется уведомление в Telegram
 	•	Отчёт публикуется через GitHub Pages
-
+111
 🔗 Allure-отчет
 
 Открыть Allure-отчёт
