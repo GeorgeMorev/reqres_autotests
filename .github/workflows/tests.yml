@@ -54,22 +54,27 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-            STATUS="${{ job.status }}"
-            REPO="${{ github.repository }}"
-            BRANCH="${{ github.ref_name }}"
-            COMMIT_AUTHOR="${{ github.actor }}"
-            COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
-            REPORT_URL="https://georgemorev.github.io/reqres_autotests/"
-            
-            TEXT="✅ *Тесты завершены*\n\n📦 *Репозиторий:* $REPO\n🌿 *Ветка:* $BRANCH\n👤 *Автор:* $COMMIT_AUTHOR\n💬 *Коммит:* $COMMIT_MESSAGE\n📊 *Статус:* $STATUS"
-            
-            if [[ "$BRANCH" == "main" || "$BRANCH" == "develop" ]]; then
-              TEXT="$TEXT\n\n📎 [Открыть Allure-отчёт]($REPORT_URL)"
-            fi
-            
-            curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
-              -H "Content-Type: application/json" \
-              -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"${TEXT}\", \"parse_mode\": \"Markdown\"}"
+          STATUS="${{ job.status }}"
+          REPO="${{ github.repository }}"
+          BRANCH="${{ github.ref_name }}"
+          COMMIT_AUTHOR="${{ github.actor }}"
+          COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
+          REPORT_URL="https://georgemorev.github.io/reqres_autotests/"
+
+          TEXT="✅ <b>Тесты завершены</b><br><br>"
+          TEXT+="📦 <b>Репозиторий:</b> ${REPO}<br>"
+          TEXT+="🌿 <b>Ветка:</b> ${BRANCH}<br>"
+          TEXT+="👤 <b>Автор:</b> ${COMMIT_AUTHOR}<br>"
+          TEXT+="💬 <b>Коммит:</b> ${COMMIT_MESSAGE}<br>"
+          TEXT+="📊 <b>Статус:</b> ${STATUS}"
+
+          if [[ "$BRANCH" == "main" || "$BRANCH" == "develop" ]]; then
+            TEXT+="<br><br>📎 <a href=\"${REPORT_URL}\">Открыть Allure-отчёт</a>"
+          fi
+
+          curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
+            -H "Content-Type: application/json" \
+            -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"${TEXT}\", \"parse_mode\": \"HTML\"}"
 
   deploy-report:
     needs: test
