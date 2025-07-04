@@ -54,33 +54,22 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          STATUS="${{ job.status }}"
-          REPO="${{ github.repository }}"
-          BRANCH="${{ github.ref_name }}"
-          COMMIT_AUTHOR="${{ github.actor }}"
-          COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
-          REPORT_URL="https://georgemorev.github.io/reqres_autotests/"
-
-          ESCAPE() {
-            perl -pe 's/([_\*\(\)\~\`\>\#\+\=\|\{\}\.\!\-])/\\$1/g'
-          }
-          
-          ESCAPED_REPO=$(printf "%s" "$REPO" | ESCAPE)
-          ESCAPED_BRANCH=$(printf "%s" "$BRANCH" | ESCAPE)
-          ESCAPED_AUTHOR=$(printf "%s" "$COMMIT_AUTHOR" | ESCAPE)
-          ESCAPED_MESSAGE=$(printf "%s" "$COMMIT_MESSAGE" | ESCAPE)
-          ESCAPED_LINK_TEXT=$(printf "%s" "Открыть Allure-отчёт" | ESCAPE)
-          ESCAPED_URL_LINK=$(printf "%s" "$REPORT_URL" | ESCAPE)
-
-          TEXT="✅ *Тесты завершены*\n\n📦 *Репозиторий:* ${ESCAPED_REPO}\n🌿 *Ветка:* ${ESCAPED_BRANCH}\n👤 *Автор:* ${ESCAPED_AUTHOR}\n💬 *Коммит:* ${ESCAPED_MESSAGE}\n📊 *Статус:* ${STATUS}"
-
-          if [[ "$BRANCH" == "main" || "$BRANCH" == "develop" ]]; then
-            TEXT="$TEXT\n\n📎 \[${ESCAPED_LINK_TEXT}\]\(${ESCAPED_URL_LINK}\)"
-          fi
-
-          curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
-            -H "Content-Type: application/json" \
-            -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"${TEXT}\", \"parse_mode\": \"MarkdownV2\"}"
+            STATUS="${{ job.status }}"
+            REPO="${{ github.repository }}"
+            BRANCH="${{ github.ref_name }}"
+            COMMIT_AUTHOR="${{ github.actor }}"
+            COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
+            REPORT_URL="https://georgemorev.github.io/reqres_autotests/"
+            
+            TEXT="✅ *Тесты завершены*\n\n📦 *Репозиторий:* $REPO\n🌿 *Ветка:* $BRANCH\n👤 *Автор:* $COMMIT_AUTHOR\n💬 *Коммит:* $COMMIT_MESSAGE\n📊 *Статус:* $STATUS"
+            
+            if [[ "$BRANCH" == "main" || "$BRANCH" == "develop" ]]; then
+              TEXT="$TEXT\n\n📎 [Открыть Allure-отчёт]($REPORT_URL)"
+            fi
+            
+            curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
+              -H "Content-Type: application/json" \
+              -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"${TEXT}\", \"parse_mode\": \"Markdown\"}"
 
   deploy-report:
     needs: test
