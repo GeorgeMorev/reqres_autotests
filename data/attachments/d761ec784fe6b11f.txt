@@ -1,4 +1,4 @@
-Date: Fri, 04 Jul 2025 10:11:13 GMT
+Date: Fri, 04 Jul 2025 10:14:17 GMT
 Content-Type: application/json; charset=utf-8
 Transfer-Encoding: chunked
 Connection: keep-alive
@@ -16,8 +16,8 @@ Etag: W/"ff-GaifKXMx6O+suW356Tr0H9ulU5M"
 Via: 1.1 vegur
 Cache-Control: max-age=14400
 CF-Cache-Status: HIT
-Age: 1538
+Age: 1722
 Vary: Accept-Encoding
 Server: cloudflare
-CF-RAY: 959dd6585f6ff151-ORD
-server-timing: cfL4;desc="?proto=TCP&rtt=4392&min_rtt=2106&rtt_var=2318&sent=19&recv=16&lost=0&retrans=0&sent_bytes=11593&recv_bytes=1820&delivery_rate=1325905&cwnd=257&unsent_bytes=0&cid=0cc345e2ef68e02d&ts=118&x=0"
+CF-RAY: 959ddad8cc00514c-ORD
+server-timing: cfL4;desc="?proto=TCP&rtt=3933&min_rtt=2606&rtt_var=1871&sent=19&recv=17&lost=0&retrans=0&sent_bytes=11593&recv_bytes=1820&delivery_rate=1424083&cwnd=239&unsent_bytes=0&cid=c163531044329591&ts=117&x=0"
