@@ -1,4 +1,4 @@
-Date: Fri, 04 Jul 2025 09:19:09 GMT
+Date: Fri, 04 Jul 2025 09:29:46 GMT
 Content-Type: application/json; charset=utf-8
 Transfer-Encoding: chunked
 Connection: keep-alive
@@ -10,13 +10,14 @@ X-Powered-By: Express
 Access-Control-Allow-Origin: *
 Ratelimit-Policy: 100;w=60
 Ratelimit-Limit: 100
-Ratelimit-Remaining: 94
-Ratelimit-Reset: 60
-Etag: W/"ff-aGm564oP8PdTTBt7Rr/9A79zt7Q"
+Ratelimit-Remaining: 90
+Ratelimit-Reset: 59
+Etag: W/"ff-GaifKXMx6O+suW356Tr0H9ulU5M"
 Via: 1.1 vegur
 Cache-Control: max-age=14400
-CF-Cache-Status: REVALIDATED
+CF-Cache-Status: HIT
+Age: 636
 Vary: Accept-Encoding
 Server: cloudflare
-CF-RAY: 959d8a14ab60df9a-SJC
-server-timing: cfL4;desc="?proto=TCP&rtt=3259&min_rtt=1535&rtt_var=2312&sent=18&recv=15&lost=0&retrans=1&sent_bytes=9916&recv_bytes=1410&delivery_rate=1986091&cwnd=254&unsent_bytes=0&cid=4d5e72a3300f14c1&ts=925&x=0"
+CF-RAY: 959d999f5c56eb2c-SJC
+server-timing: cfL4;desc="?proto=TCP&rtt=2894&min_rtt=1542&rtt_var=2081&sent=20&recv=17&lost=0&retrans=0&sent_bytes=11571&recv_bytes=1820&delivery_rate=2639556&cwnd=257&unsent_bytes=0&cid=176e6c37f21296ea&ts=136&x=0"
