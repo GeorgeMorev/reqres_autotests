@@ -34,6 +34,11 @@ jobs:
           unzip allure-2.21.0.zip -d /opt/
           echo "/opt/allure-2.21.0/bin" >> $GITHUB_PATH
 
+      - name: Run pre-commit checks
+        run: |
+          pip install pre-commit
+          pre-commit run --all-files
+
       - name: Run tests with Allure results
         run: |
           pytest --alluredir=reports/allure-results
