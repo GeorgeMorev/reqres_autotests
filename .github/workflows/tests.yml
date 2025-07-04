@@ -61,15 +61,15 @@ jobs:
           COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
           REPORT_URL="https://georgemorev.github.io/reqres_autotests/"
 
-          TEXT="✅ <b>Тесты завершены</b><br><br>"
-          TEXT+="📦 <b>Репозиторий:</b> ${REPO}<br>"
-          TEXT+="🌿 <b>Ветка:</b> ${BRANCH}<br>"
-          TEXT+="👤 <b>Автор:</b> ${COMMIT_AUTHOR}<br>"
-          TEXT+="💬 <b>Коммит:</b> ${COMMIT_MESSAGE}<br>"
+          TEXT="✅ <b>Тесты завершены</b>%0A%0A"
+          TEXT+="📦 <b>Репозиторий:</b> ${REPO}%0A"
+          TEXT+="🌿 <b>Ветка:</b> ${BRANCH}%0A"
+          TEXT+="👤 <b>Автор:</b> ${COMMIT_AUTHOR}%0A"
+          TEXT+="💬 <b>Коммит:</b> ${COMMIT_MESSAGE}%0A"
           TEXT+="📊 <b>Статус:</b> ${STATUS}"
 
           if [[ "$BRANCH" == "main" || "$BRANCH" == "develop" ]]; then
-            TEXT+="<br><br>📎 <a href=\"${REPORT_URL}\">Открыть Allure-отчёт</a>"
+            TEXT+="%0A%0A📎 <a href=\"${REPORT_URL}\">Открыть Allure-отчёт</a>"
           fi
 
           curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
