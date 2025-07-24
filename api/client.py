@@ -28,6 +28,8 @@ class ReqresClient:
         url = self._make_url(endpoint)
         return self.session.patch(url, data=data, json=json, **kwargs)
 
+    # Функция для отправки запроса delete
+    # Принимаемый аргумент - URL для отправки запроса
     def delete(self, endpoint, **kwargs):
         url = self._make_url(endpoint)
         return self.session.delete(url, **kwargs)
